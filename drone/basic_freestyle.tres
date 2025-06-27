@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="drone_res" load_steps=2 format=3 uid="uid://xlf4hpp523ev"]
+
+[ext_resource type="Script" uid="uid://dy2lcmvlnvhsn" path="res://drone/dronesettings_res.gd" id="1_h8dg6"]
+
+[resource]
+script = ExtResource("1_h8dg6")
+drone_name = "Basic Freestyle"
+pitch_sense = 20.0
+roll_sense = 20.0
+yaw_sense = 20.0
+thrust_sense = 100.0
+thrustmax = 0.0
+cam_angle = 10.0
+metadata/_custom_type_script = "uid://dy2lcmvlnvhsn"

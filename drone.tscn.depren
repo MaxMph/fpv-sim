@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://x2k3fqntvfuv"]
+
+[ext_resource type="Script" uid="uid://b0h4j8woyb1np" path="res://drone/drone.gd" id="1_uvgqj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
+size = Vector3(0.8, 0.1, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a202f"]
+size = Vector3(0.8, 0.1, 0.8)
+
+[node name="drone" type="RigidBody3D"]
+transform = Transform3D(0.768638, 0.210739, -0.603974, -0.522709, 0.751182, -0.403115, 0.368742, 0.625552, 0.687542, 0, 0, 0)
+mass = 2.0
+linear_damp = 1.0
+angular_damp = 8.0
+script = ExtResource("1_uvgqj")
+thrust = null
+pitch_sense = null
+roll_sense = null
+yaw_sense = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+visible = false
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.166605, 0.00262323)
