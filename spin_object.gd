@@ -1,6 +1,9 @@
 extends Node3D
 
-@export var rotspeed = 10.0
+@export var res: drone_res
+@export var rotspeed = 1.8
+var focused_on = false
 
 func _process(delta: float) -> void:
-	rotation.y += rotspeed * delta
+	if focused_on:
+		rotation.y += rotspeed * delta

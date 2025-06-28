@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnomt1lpun2c6"]
+[gd_scene load_steps=2 format=3 uid="uid://dnomt1lpun2c6"]
 
 [ext_resource type="Script" uid="uid://d1eoxgs1je0co" path="res://settings_menu.gd" id="1_ufg0w"]
-[ext_resource type="Resource" uid="uid://xlf4hpp523ev" path="res://drone/basic_freestyle.tres" id="2_0cmel"]
 
 [node name="drone settings" type="Control" groups=["esc_menu", "menu"]]
 layout_mode = 3
@@ -11,7 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ufg0w")
-drone = ExtResource("2_0cmel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(800, 600)

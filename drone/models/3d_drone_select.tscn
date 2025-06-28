@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bix33erefm0n5"]
+[gd_scene load_steps=11 format=3 uid="uid://bix33erefm0n5"]
 
+[ext_resource type="Script" uid="uid://cpyoudmh4niio" path="res://drone/models/3d_drone_select.gd" id="1_0gf7u"]
 [ext_resource type="Script" uid="uid://cpxo26x4r5mvs" path="res://spin_object.gd" id="1_l8std"]
 [ext_resource type="PackedScene" uid="uid://cbim0rhfu3met" path="res://drone/models/fpv_drone_1.tscn" id="2_0gf7u"]
+[ext_resource type="Resource" uid="uid://xlf4hpp523ev" path="res://drone/basic_freestyle.tres" id="3_xi01b"]
+[ext_resource type="Texture2D" uid="uid://dfnf0aff3gri6" path="res://ui/grid-export.png" id="5_uf6hy"]
+[ext_resource type="Script" uid="uid://c6axw3fkdqfot" path="res://drone/models/scroll_bg.gd" id="6_36xh6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l8std"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,37 +20,57 @@ sky = SubResource("Sky_0gf7u")
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.0964
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_36xh6"]
 
 [node name="3d_drone_select" type="Node3D"]
+script = ExtResource("1_0gf7u")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xi01b")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.985381, 0.170364, 0, -0.170364, 0.985381, 0, 0.295726, 2.08851)
+transform = Transform3D(1, 0, 0, 0, 0.985381, 0.170364, 0, -0.170364, 0.985381, 0, 0.295726, 2.07571)
 
 [node name="Node3D" type="Node3D" parent="."]
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="Marker3D" type="Marker3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("1_l8std")
-rotspeed = 1.8
+res = ExtResource("3_xi01b")
 
-[node name="fpv_drone_1" parent="Marker3D" instance=ExtResource("2_0gf7u")]
+[node name="fpv_drone_1" parent="Node3D/Marker3D" instance=ExtResource("2_0gf7u")]
 transform = Transform3D(0.14, 0, -9.76996e-15, 0, 0.14, 0, 9.76996e-15, 0, 0.14, 0, 0, 0)
 
-[node name="Marker3D2" type="Marker3D" parent="."]
+[node name="Marker3D2" type="Marker3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+script = ExtResource("1_l8std")
+res = ExtResource("3_xi01b")
 
-[node name="Marker3D3" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+[node name="fpv_drone_1" parent="Node3D/Marker3D2" instance=ExtResource("2_0gf7u")]
+transform = Transform3D(-6.1196e-09, 0, -0.14, 0, 0.14, 0, 0.14, 0, -6.1196e-09, 0, 0, 0)
 
-[node name="Marker3D4" type="Marker3D" parent="."]
+[node name="Marker3D3" type="Marker3D" parent="Node3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -1)
+script = ExtResource("1_l8std")
+res = ExtResource("3_xi01b")
+
+[node name="fpv_drone_1" parent="Node3D/Marker3D3" instance=ExtResource("2_0gf7u")]
+transform = Transform3D(0.14, 0, -9.76996e-15, 0, 0.14, 0, 9.76996e-15, 0, 0.14, 0, 0, 0)
+
+[node name="Marker3D4" type="Marker3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+script = ExtResource("1_l8std")
+res = ExtResource("3_xi01b")
+
+[node name="fpv_drone_1" parent="Node3D/Marker3D4" instance=ExtResource("2_0gf7u")]
+transform = Transform3D(-6.11958e-09, 0, 0.14, 0, 0.14, 0, -0.14, 0, -6.11958e-09, 0, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 1)
-light_volumetric_fog_energy = 3.065
+light_volumetric_fog_energy = 4.0
 spot_range = 3.39036
 spot_angle = 23.373
 
@@ -73,6 +97,10 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
+[node name="left" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+text = " Left "
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -96,6 +124,55 @@ fit_content = true
 layout_mode = 2
 text = "Change"
 
-[node name="Button2" type="Button" parent="Control/HBoxContainer/VBoxContainer"]
+[node name="select" type="Button" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Select"
+
+[node name="right" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+text = "Right"
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, 0)
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("5_uf6hy")
+region_enabled = true
+region_rect = Rect2(0, 0, 8000, 8000)
+script = ExtResource("6_36xh6")
+speed = -80
+
+[node name="Sprite3D4" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 0)
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("5_uf6hy")
+region_enabled = true
+region_rect = Rect2(0, 0, 8000, 8000)
+script = ExtResource("6_36xh6")
+speed = -80
+
+[node name="workshop" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="workshop"]
+transform = Transform3D(7.93, 0, 0, 0, 6.96, 0, 0, 0, 1, 0, 0, -4)
+mesh = SubResource("BoxMesh_36xh6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="workshop"]
+transform = Transform3D(-3.46631e-07, 0, -1, 0, 6.96, 0, 7.93, 0, -4.37114e-08, -4, 0, -1)
+mesh = SubResource("BoxMesh_36xh6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="workshop"]
+transform = Transform3D(-3.46631e-07, 0, -1, 0, 6.96, 0, 7.93, 0, -4.37114e-08, 4, 0, -1)
+mesh = SubResource("BoxMesh_36xh6")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="workshop"]
+transform = Transform3D(-1.43234e-14, -9.744, 4.37114e-08, -3.81294e-07, -4.25924e-07, -1, 8.723, 0, -4.37114e-08, 0, -2, -1)
+mesh = SubResource("BoxMesh_36xh6")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="workshop"]
+transform = Transform3D(-1.43234e-14, -9.744, 4.37114e-08, -3.81294e-07, -4.25924e-07, -1, 8.723, 0, -4.37114e-08, 0, 4, -1)
+mesh = SubResource("BoxMesh_36xh6")
+
+[connection signal="pressed" from="Control/HBoxContainer/left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer/select" to="." method="_on_select_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/right" to="." method="_on_right_pressed"]

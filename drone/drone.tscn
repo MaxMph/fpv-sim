@@ -1,15 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://x2k3fqntvfuv"]
+[gd_scene load_steps=4 format=3 uid="uid://x2k3fqntvfuv"]
 
 [ext_resource type="Script" uid="uid://b0h4j8woyb1np" path="res://drone/drone.gd" id="1_uvgqj"]
+[ext_resource type="PackedScene" uid="uid://cbim0rhfu3met" path="res://drone/models/fpv_drone_1.tscn" id="2_p11in"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
-size = Vector3(0.8, 0.1, 0.8)
-
-[sub_resource type="BoxMesh" id="BoxMesh_a202f"]
-size = Vector3(0.8, 0.1, 0.8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwikr"]
-albedo_color = Color(0.164706, 0.286275, 0.286275, 1)
+size = Vector3(0.8, 0.289136, 0.8)
 
 [node name="drone" type="RigidBody3D"]
 gravity_scale = 3.0
@@ -18,12 +13,10 @@ angular_damp = 8.0
 script = ExtResource("1_uvgqj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0945679, 0)
 shape = SubResource("BoxShape3D_4xowi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-visible = false
-mesh = SubResource("BoxMesh_a202f")
-surface_material_override/0 = SubResource("StandardMaterial3D_mwikr")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, -0.0723053, -0.308685)
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0.0159986, -0.308685)
+
+[node name="fpv_drone_1" parent="." instance=ExtResource("2_p11in")]

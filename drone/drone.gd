@@ -19,13 +19,13 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	
-	var pitchdir = Input.get_axis("ui_up", "ui_down")
-	if Input.get_axis("ui_up", "ui_down"):
+	var pitchdir = Input.get_axis("pitch_down", "pitch_up")
+	if pitchdir:#Input.get_axis("ui_up", "ui_down"):
 		#transform.basis = transform.basis.rotated(Vector3.RIGHT, pitch_sense * pitchdir * delta)
 		#rotation += Vector3(pitchdir * pitch_sense, 0, 0) * transform.basis.rotated()
 		#rotate_object_local(Vector3.RIGHT, pitch_sense * pitchdir * delta)
 		angular_velocity += global_transform.basis.x * Global.drone.pitch_sense * pitchdir * delta
-	var rolldir = Input.get_axis("ui_left", "ui_right")
+	var rolldir = Input.get_axis("roll_l", "roll_r")
 	if rolldir:
 		angular_velocity += global_transform.basis.z * Global.drone.roll_sense * -rolldir * delta
 		#rotate_object_local(Vector3.FORWARD, roll_sense * rolldir * delta)
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		#rotate_object_local(Vector3.UP, yaw_sense * yawdir * delta)
 		#apply_angular(global_transform.basis)
 		angular_velocity += global_transform.basis.y * Global.drone.yaw_sense * yawdir * delta
-		#angular_velocity 
+		#angular_velocity
 	
 	if Input.is_action_pressed("trust"):
 		cur_thrust += global_transform.basis.y * Global.drone.thrust_sense * delta
