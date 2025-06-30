@@ -32,3 +32,11 @@ func display():
 	%rollvalue.text = str(Global.drone.roll_sense)
 	%yawslider.value = Global.drone.yaw_sense
 	%yawvalue.text = str(Global.drone.yaw_sense)
+
+
+func _on_resume_pressed() -> void:
+	close()
+
+
+func _on_quit_pressed() -> void:
+	get_tree().change_scene_to_file("res://main_menu.tscn")

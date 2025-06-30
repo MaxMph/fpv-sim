@@ -8,6 +8,8 @@ extends RigidBody3D
 var base_thrust = 8.0
 var cur_thrust: Vector3
 
+var pickups = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_settings()
@@ -44,6 +46,16 @@ func _physics_process(delta: float) -> void:
 		#linear_velocity = (rotation + Vector3(deg_to_rad(90), deg_to_rad(90), deg_to_rad(90))) * thrust # * delta
 		#linear_velocity =# transform.basis. (Vector3.UP, thrust * delta)
 		#linear_velocity = Vector3.UP * thrust * delta
+	
+	
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+	
+	if Input.is_action_just_pressed("flip"):
+		rotation = Vector3.ZERO
+	
+	if pickups > 0:
+		$Control/pickups.text = str(pickups)
 	
 	cur_thrust += global_transform.basis.y * base_thrust * delta
 	linear_velocity += cur_thrust

@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
 size = Vector3(0.8, 0.289136, 0.8)
 
-[node name="drone" type="RigidBody3D"]
+[node name="drone" type="RigidBody3D" groups=["player"]]
 gravity_scale = 3.0
 linear_damp = 1.0
 angular_damp = 8.0
@@ -20,3 +20,18 @@ shape = SubResource("BoxShape3D_4xowi")
 transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0.0159986, -0.308685)
 
 [node name="fpv_drone_1" parent="." instance=ExtResource("2_p11in")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="pickups" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 34.0
+text = "
+"
+horizontal_alignment = 1
+vertical_alignment = 1

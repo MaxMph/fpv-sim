@@ -3,6 +3,15 @@ extends Node3D
 var goal_rot = 0
 var rotspeed = 10
 
+var shifting_map = false
+
+#var maps = {
+	#1: preload("res://drone/models/map_1.tscn"),
+	#2: preload("res://test_world.tscn"),
+#}
+var map: PackedScene
+
+
 @onready var drone_focused = $Node3D/Marker3D
 
 func _ready() -> void:
@@ -14,6 +23,9 @@ func _process(delta: float) -> void:
 		basepoint.rotation.y = lerp(basepoint.rotation.y, goal_rot, rotspeed * delta)
 	#else: fvggvfgffgaddfjjkkkkyhgg
 		#print("rstghe")
+	if Input.is_action_just_pressed("pitch_up"):
+		map_select_shifted(false)
+		
 
 func _on_left_pressed() -> void:
 	goal_rot = basepoint.rotation.y + deg_to_rad(90)
@@ -39,7 +51,25 @@ func check_focus():
 func get_distance(pos: Vector3):
 	return abs(pos - $Camera3D.global_position)
 
+#func map_selected():
+	#$Control/drone.show()
+	#$Node3D.show()
 
 func _on_select_pressed() -> void:
 	Global.drone = drone_focused.res
-	get_tree().change_scene_to_file("res://test_world.tscn")
+	#get_tree().change_scene_to_file("res://drone/models/map_1.tscn")
+	get_tree().change_scene_to_packed(map)
+
+
+func _on_map_select_pressed(Map) -> void:
+	#get_tree().change_scee_to_packed(map)
+	map = Map
+	$Control/drone.show()
+	$Node3D.show()
+	$Control/HBoxContainer.hide()
+
+func map_select_shifted(up: bool):
+	if shifting_map == false:
+		pass
+		if up:
+			$Control/HBoxContainer/VBoxContainer2.get_children()

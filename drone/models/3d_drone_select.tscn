@@ -1,11 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://bix33erefm0n5"]
+[gd_scene load_steps=18 format=3 uid="uid://bix33erefm0n5"]
 
 [ext_resource type="Script" uid="uid://cpyoudmh4niio" path="res://drone/models/3d_drone_select.gd" id="1_0gf7u"]
 [ext_resource type="Script" uid="uid://cpxo26x4r5mvs" path="res://spin_object.gd" id="1_l8std"]
 [ext_resource type="PackedScene" uid="uid://cbim0rhfu3met" path="res://drone/models/fpv_drone_1.tscn" id="2_0gf7u"]
 [ext_resource type="Resource" uid="uid://xlf4hpp523ev" path="res://drone/basic_freestyle.tres" id="3_xi01b"]
+[ext_resource type="Script" uid="uid://dyaoig3f4g835" path="res://drone/models/level_box.gd" id="5_i2jn8"]
+[ext_resource type="Texture2D" uid="uid://c0xxde5vqi2nd" path="res://ui/Screenshot 2025-06-28 121933.png" id="5_khnfe"]
 [ext_resource type="Texture2D" uid="uid://dfnf0aff3gri6" path="res://ui/grid-export.png" id="5_uf6hy"]
+[ext_resource type="Texture2D" uid="uid://bk0edvr57pfii" path="res://ui/Screenshot 2025-06-28 192106.png" id="6_2mqlh"]
 [ext_resource type="Script" uid="uid://c6axw3fkdqfot" path="res://drone/models/scroll_bg.gd" id="6_36xh6"]
+[ext_resource type="PackedScene" uid="uid://c46q76p4h4a5q" path="res://maps/city_map_1.tscn" id="6_dui6u"]
+[ext_resource type="Texture2D" uid="uid://c50g4xefdcmy8" path="res://ui/Screenshot 2025-06-28 130607.png" id="6_uvq7s"]
+[ext_resource type="PackedScene" uid="uid://b24u2an4ngf46" path="res://drone/models/map_1.tscn" id="8_xna7h"]
+[ext_resource type="PackedScene" uid="uid://bbhdplc7puocg" path="res://test_world.tscn" id="10_lfq87"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l8std"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -35,6 +42,7 @@ environment = SubResource("Environment_xi01b")
 transform = Transform3D(1, 0, 0, 0, 0.985381, 0.170364, 0, -0.170364, 0.985381, 0, 0.295726, 2.07571)
 
 [node name="Node3D" type="Node3D" parent="."]
+visible = false
 
 [node name="Marker3D" type="Marker3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
@@ -70,6 +78,7 @@ transform = Transform3D(-6.11958e-09, 0, 0.14, 0, 0.14, 0, -0.14, 0, -6.11958e-0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 1)
+visible = false
 light_volumetric_fog_energy = 4.0
 spot_range = 3.39036
 spot_angle = 23.373
@@ -82,7 +91,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="drone" type="HBoxContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -97,40 +107,123 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="left" type="Button" parent="Control/HBoxContainer"]
+[node name="left" type="Button" parent="Control/drone"]
 layout_mode = 2
 text = " Left "
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/drone"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/drone/VBoxContainer"]
 layout_mode = 2
 text = "Drone Name"
 horizontal_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/drone/VBoxContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/drone/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
 fit_content = true
 
-[node name="Button" type="Button" parent="Control/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Control/drone/VBoxContainer"]
 layout_mode = 2
 text = "Change"
 
-[node name="select" type="Button" parent="Control/HBoxContainer/VBoxContainer"]
+[node name="select" type="Button" parent="Control/drone/VBoxContainer"]
 layout_mode = 2
 text = "Select"
 
-[node name="right" type="Button" parent="Control/HBoxContainer"]
+[node name="right" type="Button" parent="Control/drone"]
 layout_mode = 2
 text = "Right"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -264.0
+offset_right = 100.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="city 1" type="VBoxContainer" parent="Control/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+script = ExtResource("5_i2jn8")
+map = ExtResource("6_dui6u")
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer2/city 1"]
+layout_mode = 2
+text = "Nightime City"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer2/city 1"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("6_2mqlh")
+expand_mode = 5
+
+[node name="Button" type="Button" parent="Control/HBoxContainer/VBoxContainer2/city 1"]
+layout_mode = 2
+text = "Select"
+
+[node name="abandoned outpost" type="VBoxContainer" parent="Control/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+script = ExtResource("5_i2jn8")
+map = ExtResource("8_xna7h")
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer2/abandoned outpost"]
+layout_mode = 2
+text = "abandoned Outpost"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer2/abandoned outpost"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("5_khnfe")
+expand_mode = 5
+
+[node name="Button" type="Button" parent="Control/HBoxContainer/VBoxContainer2/abandoned outpost"]
+layout_mode = 2
+text = "Select"
+
+[node name="test level" type="VBoxContainer" parent="Control/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+script = ExtResource("5_i2jn8")
+map = ExtResource("10_lfq87")
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer2/test level"]
+layout_mode = 2
+text = "Test Level"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer2/test level"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("6_uvq7s")
+expand_mode = 5
+
+[node name="Button" type="Button" parent="Control/HBoxContainer/VBoxContainer2/test level"]
+layout_mode = 2
+text = "Select"
 
 [node name="Sprite3D3" type="Sprite3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, 0)
@@ -173,6 +266,9 @@ mesh = SubResource("BoxMesh_36xh6")
 transform = Transform3D(-1.43234e-14, -9.744, 4.37114e-08, -3.81294e-07, -4.25924e-07, -1, 8.723, 0, -4.37114e-08, 0, 4, -1)
 mesh = SubResource("BoxMesh_36xh6")
 
-[connection signal="pressed" from="Control/HBoxContainer/left" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer/select" to="." method="_on_select_pressed"]
-[connection signal="pressed" from="Control/HBoxContainer/right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Control/drone/left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/drone/VBoxContainer/select" to="." method="_on_select_pressed"]
+[connection signal="pressed" from="Control/drone/right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer2/city 1/Button" to="Control/HBoxContainer/VBoxContainer2/city 1" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer2/abandoned outpost/Button" to="Control/HBoxContainer/VBoxContainer2/abandoned outpost" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer2/test level/Button" to="Control/HBoxContainer/VBoxContainer2/test level" method="_on_button_pressed"]
